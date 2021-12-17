@@ -7,14 +7,15 @@ function handleSubmit(event) {
 }
 
 function processText(formText) {
+    console.log('Start');
     fetch('/userData', {
         method: 'POST',
         credentials: 'same-origin',
-        mode: 'cors',
+        
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ formText: formText })
+        body: JSON.stringify({ formText })
     })
     .then(res => res.json())
     .then(function(res) {

@@ -25,12 +25,15 @@ app.listen(9000, function () {
     console.log('Example app listening on port 8080!')
 })
 
+const textApi = process.env.API_KEY
 app.post('/userData', async(req, res) => {
+    const searchUrl = req.body.formText
     console.log ('!');
-    const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${process.env.API_KEY}&lang=auto&url=${req.body.input}`);
+    const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${textApi}&url=${searchUrl}&lang=en`);
     console.log(response);
     try {
         const data = await response.json();
+        console.log(data);
         res.send(data);
     } catch (error) {
         console.log("error", error);
