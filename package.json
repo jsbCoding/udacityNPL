@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  
   "scripts": {
     "dev": "export NODE_OPTIONS=--openssl-legacy-provider; next dev",
     "build": "react-scripts --openssl-legacy-provider build",

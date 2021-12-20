@@ -3,11 +3,12 @@ function handleSubmit(event) {
 
     // check what text was put into the form field
     let formText = document.getElementById('name').value;
+    
     processText(formText);
 }
 
 function processText(formText) {
-    console.log('Start');
+    
     fetch('/userData', {
         method: 'POST',
         credentials: 'same-origin',

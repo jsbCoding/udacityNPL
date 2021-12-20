@@ -1,6 +1,6 @@
 var path = require('path')
 const express = require('express')
-const mockAPIResponse = require('./mockAPI.js')
+
 const dotenv = require('dotenv');
 const fetch = require("node-fetch");
 var bodyParser = require('body-parser');
@@ -15,6 +15,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
+app.use(express.static(__dirname + '/userData'));
+
 app.get('/', function (req, res) {
     // res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))
@@ -26,7 +28,7 @@ app.listen(9000, function () {
 })
 
 const textApi = process.env.API_KEY
-app.post('/userData', async(req, res) => {
+const getTextInfo = async(req, res) => {
     const searchUrl = req.body.formText
     console.log ('!');
     const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${textApi}&url=${searchUrl}&lang=en`);
@@ -38,4 +40,6 @@ app.post('/userData', async(req, res) => {
     } catch (error) {
         console.log("error", error);
     }
-})
+}
+//Create a post route (user's input)
+app.post("http://localhost:9000/userData",getTextInfo);
