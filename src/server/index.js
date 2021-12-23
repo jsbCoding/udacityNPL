@@ -15,15 +15,16 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(cors());
 
-app.use(express.static(__dirname + '/userData'));
+app.use(express.static(__dirname + 'userData'));
+console.log(__dirname);
 
-app.get('/', function (req, res) {
+app.get(__dirname + 'userData', function (req, res) {
     // res.sendFile('dist/index.html')
     res.sendFile(path.resolve('src/client/views/index.html'))
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(9000, function () {
+app.listen(__dirname, function () {
     console.log('Example app listening on port 8080!')
 })
 
@@ -42,4 +43,4 @@ const getTextInfo = async(req, res) => {
     }
 }
 //Create a post route (user's input)
-app.post("http://localhost:9000/userData",getTextInfo);
+app.post(__dirname + 'userData',getTextInfo);

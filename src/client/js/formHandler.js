@@ -8,21 +8,23 @@ function handleSubmit(event) {
 }
 
 function processText(formText) {
-    
-    fetch('/userData', {
+    fetch(__dirname + 'userData', {
         method: 'POST',
         credentials: 'same-origin',
         
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify({ formText })
+        body: JSON.stringify( formText )
     })
     .then(res => res.json())
     .then(function(res) {
         let result = document.getElementById('result');
         Client.updateResult (result, res);
     })
+    .catch();{
+        console.log('a');
+    }
 }
 
 export { handleSubmit };
