@@ -8,7 +8,7 @@ function handleSubmit(event) {
 }
 
 function processText(formText) {
-    fetch(__dirname + 'userData', {
+    fetch('http://localhost:8080/userData', {
         method: 'POST',
         credentials: 'same-origin',
         

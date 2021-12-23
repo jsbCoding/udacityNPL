@@ -24,7 +24,7 @@ app.get(__dirname + 'userData', function (req, res) {
 })
 
 // designates what port the app will listen to for incoming requests
-app.listen(__dirname, function () {
+app.listen(8080, function () {
     console.log('Example app listening on port 8080!')
 })
 
@@ -43,4 +43,4 @@ const getTextInfo = async(req, res) => {
     }
 }
 //Create a post route (user's input)
-app.post(__dirname + 'userData',getTextInfo);
+app.post('http://localhost:8080/userData',getTextInfo);
