@@ -1,3 +1,5 @@
+projectData = {};
+
 var path = require('path')
 const express = require('express')
 
@@ -29,18 +31,22 @@ app.listen(8080, function () {
 })
 
 const textApi = process.env.API_KEY
-const getTextInfo = async(req, res) => {
-    const searchUrl = req.body.formText
-    console.log ('!');
-    const response = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${textApi}&url=${searchUrl}&lang=en`);
-    console.log(response);
-    try {
-        const data = await response.json();
-        console.log(data);
-        res.send(data);
-    } catch (error) {
-        console.log("error", error);
-    }
-}
+
 //Create a post route (user's input)
-app.post('http://localhost:8080/userData',getTextInfo);
+app.get('/all', getData)
+function getData (req, res){
+    res.send(projectData);
+    console.log(projectData)
+}
+
+// Setup post request
+app.post("/postData", addData)
+function addData(req, res){
+    projectData = {
+        agreement: req.body.agreement,
+        confidence: req.body.confidence,
+        score: req.body.score_tag
+    }
+    res.send(projectData);
+    console.log(projectData);
+  };
